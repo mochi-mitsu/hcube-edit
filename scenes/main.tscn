@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct5mkfx2fp7n8"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_iijbt"]
+[ext_resource type="PackedScene" uid="uid://dit1c0e7c0qya" path="res://scenes/hud.tscn" id="2_3f6mg"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_iijbt")
+
+[node name="HUD" parent="." instance=ExtResource("2_3f6mg")]
+visible = false

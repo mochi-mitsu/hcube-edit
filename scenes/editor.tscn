@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://dakskwhtjdgm2"]
+
+[ext_resource type="Script" path="res://scripts/editor/Editor.gd" id="1_qbdir"]
+[ext_resource type="Script" path="res://scripts/editor/outline.gd" id="3_lc18q"]
+[ext_resource type="Script" path="res://scripts/editor/tileSelect.gd" id="5_hr8co"]
+[ext_resource type="TileSet" uid="uid://bfgk00t3l8w7v" path="res://tiles/objects/objects.tres" id="6_82kaf"]
+[ext_resource type="TileSet" uid="uid://btbbl650ijstx" path="res://tiles/tilesets/lines.tres" id="6_cdkcg"]
+[ext_resource type="Theme" uid="uid://ddhg83o0uetji" path="res://font themes/defaultText.tres" id="8_rior8"]
+
+[node name="Editor" type="Node2D"]
+script = ExtResource("1_qbdir")
+
+[node name="outline" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.521569)
+script = ExtResource("3_lc18q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="tileSelect" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("5_hr8co")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/tileSelect"]
+offset_left = 887.0
+offset_top = 21.0
+offset_right = 1261.0
+offset_bottom = 715.0
+color = Color(0.584314, 0.337255, 0.0509804, 0.235294)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/tileSelect"]
+offset_left = 560.0
+offset_top = 648.0
+offset_right = 747.0
+offset_bottom = 710.0
+color = Color(0.584314, 0.337255, 0.0509804, 0.235294)
+
+[node name="TileMap" type="TileMap" parent="CanvasLayer/tileSelect"]
+scale = Vector2(2, 2)
+tile_set = ExtResource("6_cdkcg")
+format = 2
+layer_0/tile_data = PackedInt32Array(65564, 0, 0, 196636, 0, 1, 327708, 0, 2, 458780, 0, 3, 589852, 0, 4, 720924, 0, 5, 851996, 0, 6, 983068, 0, 7, 1114140, 0, 8, 1245212, 0, 9, 65566, 65536, 0, 196638, 65536, 1, 327710, 65536, 2, 458782, 65536, 3, 589854, 65536, 4, 720926, 65536, 5, 851998, 65536, 6, 983070, 65536, 7, 1114142, 65536, 8, 1245214, 65536, 9, 65568, 131072, 0, 196640, 131072, 1, 327712, 131072, 2, 458784, 131072, 3, 589856, 131072, 4, 720928, 131072, 5, 852000, 131072, 6, 983072, 131072, 7, 1114144, 131072, 8, 1245216, 131072, 9, 1376288, 131072, 10, 65570, 196608, 0, 196642, 196608, 1, 327714, 196608, 2, 458786, 196608, 3, 589858, 196608, 4, 720930, 196608, 5, 852002, 196608, 6, 983074, 196608, 7, 1114146, 196608, 8, 1245218, 196608, 9, 1376290, 196608, 10, 65572, 262144, 0, 196644, 262144, 1, 327716, 262144, 2, 458788, 262144, 3, 589860, 262144, 4, 720932, 262144, 5, 852004, 262144, 6, 983076, 262144, 7, 1114148, 262144, 8, 1245220, 262144, 9, 1376292, 262144, 10, 196646, 327680, 1, 327718, 327680, 2, 458790, 327680, 3, 589862, 327680, 4, 720934, 327680, 5, 852006, 327680, 6, 983078, 327680, 7, 1114150, 327680, 8, 1245222, 327680, 9, 1376294, 327680, 10)
+
+[node name="ObjectMap" type="TileMap" parent="CanvasLayer/tileSelect"]
+scale = Vector2(2, 2)
+tile_set = ExtResource("6_82kaf")
+format = 2
+layer_0/tile_data = PackedInt32Array(458782, 0, 0, 458784, 65536, 0, 589856, 65536, 1, 720928, 65536, 2, 852000, 65536, 3, 458786, 131072, 0, 458788, 196608, 0)
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/tileSelect"]
+offset_left = 568.0
+offset_top = 650.0
+offset_right = 738.0
+offset_bottom = 703.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 32
+text = "Objects"
+flat = true
+
+[node name="currentTile" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(198, 61)
+scale = Vector2(3.27666, 3.27666)
+hframes = 6
+vframes = 11
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 6.0
+offset_top = 41.0
+offset_right = 769.0
+offset_bottom = 216.0
+scale = Vector2(0.205011, 0.205011)
+theme = ExtResource("8_rior8")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 48
+text = "Current Tile:"

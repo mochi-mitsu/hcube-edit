@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="TileSet" path="res://tiles/tilesets/lines.tres" id="1_vl602"]
+[ext_resource type="PackedScene" path="res://scenes/level bits/object_map.tscn" id="2_j7733"]
+[ext_resource type="Texture2D" path="res://tiles/objects/1.png" id="3_p246s"]
+[ext_resource type="Script" path="res://scripts/level bits/ObjectMap.gd" id="4_m7k74"]
+[ext_resource type="PackedScene" path="res://scenes/level bits/ScreenCamera.tscn" id="5_sucxm"]
+[ext_resource type="Script" path="res://scripts/level bits/ScreenCamera.gd" id="6_rpa3h"]
+
+[sub_resource type="TileSetAtlasSource" id="1"]
+texture = ExtResource("3_p246s")
+separation = Vector2i(1, 1)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+1:1/0 = 0
+1:3/0 = 0
+1:2/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="2"]
+sources/0 = SubResource("1")
+
+[node name="Level" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_vl602")
+format = 2
+
+[node name="ObjectMap" type="TileMap" parent="." instance=ExtResource("2_j7733")]
+visibility_layer = 2
+texture_filter = 1
+position = Vector2(-1, 0)
+tile_set = SubResource("2")
+format = 2
+script = ExtResource("4_m7k74")
+
+[node name="ScreenCamera" type="Camera2D" parent="." instance=ExtResource("5_sucxm")]
+script = ExtResource("6_rpa3h")

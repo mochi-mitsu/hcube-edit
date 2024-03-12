@@ -1,0 +1,8 @@
+0.0.2
++editor now has its own version number (hcube version shown in brackets)
++tile selector now renders on top of level with overlay
++selecting a tile now closes the overlay
++currently selected tile now shown in top left corner
++the camera can now be zoomed in and out
+*objects now actually align to the map properly (they were all 1 pixel too far left)
+*tile outline changed to highlight so you can actually see it

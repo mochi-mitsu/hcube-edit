@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bl3mif48idm3n"]
+
+[ext_resource type="Texture2D" uid="uid://ddiyho5jupjbg" path="res://tiles/objects/1.png" id="1"]
+[ext_resource type="Script" path="res://scripts/level bits/ObjectMap.gd" id="2"]
+
+[sub_resource type="TileSetAtlasSource" id="1"]
+texture = ExtResource("1")
+separation = Vector2i(1, 1)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+1:1/0 = 0
+1:3/0 = 0
+1:2/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSet" id="2"]
+sources/0 = SubResource("1")
+
+[node name="ObjectMap" type="TileMap"]
+visibility_layer = 2
+texture_filter = 1
+tile_set = SubResource("2")
+format = 2
+script = ExtResource("2")

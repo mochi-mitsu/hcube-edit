@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmefoe7n76fe7"]
+
+[ext_resource type="Texture2D" uid="uid://84kresx30f0a" path="res://sprites/objects/coin/sparkles1.png" id="1_cdgtv"]
+[ext_resource type="Texture2D" uid="uid://c6o8hqmf2dw51" path="res://sprites/objects/coin/sparkles2.png" id="2_8xtfv"]
+[ext_resource type="Texture2D" uid="uid://dd1qt5u0mp3fm" path="res://sprites/objects/coin/coin.png" id="3_xlrjh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_55rre"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cdgtv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8xtfv")
+}],
+"loop": false,
+"name": &"collect",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xlrjh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cfhgh"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="GDScript" id="GDScript_pww2e"]
+resource_name = "coin"
+script/source = "extends CollisionShape2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	get_parent().get_parent().play(\"default\")
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_area_2d_body_entered(body):
+	if body == $\"../../../Player\":
+		get_node(\"/root/Main/HUD\").coins += 1
+		get_parent().get_parent().play(\"collect\")
+		#await get_parent().get_parent().is_playing() == false
+		#get_parent().get_parent().free()
+
+
+func _on_coin_animation_finished():
+	if get_parent().get_parent().animation == \"collect\":
+		get_parent().get_parent().queue_free()
+"
+
+[node name="coin" type="AnimatedSprite2D"]
+position = Vector2(-1086, 669)
+sprite_frames = SubResource("SpriteFrames_55rre")
+animation = &"collect"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_cfhgh")
+script = SubResource("GDScript_pww2e")
+
+[connection signal="animation_finished" from="." to="Area2D/CollisionShape2D" method="_on_coin_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="Area2D/CollisionShape2D" method="_on_area_2d_body_entered"]

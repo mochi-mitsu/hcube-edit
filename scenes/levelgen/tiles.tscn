@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cheisbk2w8h1b"]
+
+[ext_resource type="TileSet" uid="uid://btbbl650ijstx" path="res://tiles/tilesets/lines.tres" id="1_ttksb"]
+
+[node name="TileMap" type="TileMap"]
+visibility_layer = 2
+texture_filter = 1
+tile_set = ExtResource("1_ttksb")
+format = 2

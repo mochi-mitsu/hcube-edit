@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://n5mwksge6qv8"]
+
+[ext_resource type="Script" path="res://scripts/level bits/ScreenCamera.gd" id="1"]
+
+[node name="ScreenCamera" type="Camera2D"]
+script = ExtResource("1")

@@ -1,0 +1,144 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqcqg1rcjgs6c"]
+
+[ext_resource type="Texture2D" uid="uid://t3dwj3pvdaa4" path="res://sprites/1365-sparkles-yellow.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://221mmlwsdyi2" path="res://sprites/player/dead.png" id="4"]
+
+[sub_resource type="ParticleProcessMaterial" id="1"]
+lifetime_randomness = 0.13
+particle_flag_disable_z = true
+direction = Vector3(0, -10, 0)
+spread = 85.32
+initial_velocity_max = 136.0
+angular_velocity_min = -92.16
+angular_velocity_max = 46.08
+gravity = Vector3(0, -100, 0)
+scale_min = 0.5
+scale_max = 0.5
+
+[sub_resource type="GDScript" id="GDScript_xvcv1"]
+resource_name = "level load button"
+script/source = "extends Button
+
+var selectedLevel = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.pressed.connect(self._button_pressed)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	selectedLevel = get_parent().selected
+
+func _button_pressed():
+	get_node(\"/root/Main\").startLevel(\"res://scenes/levels/\"+str(selectedLevel)+\".tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_xo4xu"]
+resource_name = "test level loader"
+script/source = "extends Button
+
+func _on_pressed():
+	var filemenu = FileDialog.new()
+	add_child(filemenu)
+"
+
+[sub_resource type="GDScript" id="GDScript_71jgw"]
+resource_name = "quit"
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.pressed.connect(self._button_pressed)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+func _button_pressed():
+	get_tree().quit()
+"
+
+[sub_resource type="GDScript" id="GDScript_dq4v8"]
+resource_name = "versionUpdater"
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.text = get_node(\"/root/Main\").gameVersion
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="mainMenu" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.188235, 0.188235, 0.188235, 1)
+
+[node name="MENU" type="Label" parent="."]
+offset_left = 496.0
+offset_top = 163.0
+offset_right = 766.0
+offset_bottom = 290.0
+theme_override_font_sizes/font_size = 90
+text = "EDITOR"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(849, 223)
+process_material = SubResource("1")
+texture = ExtResource("1")
+lifetime = 12.0
+local_coords = true
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(454, 218)
+process_material = SubResource("1")
+texture = ExtResource("1")
+lifetime = 12.0
+local_coords = true
+
+[node name="load button" type="Button" parent="."]
+offset_left = 592.0
+offset_top = 460.0
+offset_right = 682.0
+offset_bottom = 499.0
+text = "Load Level"
+script = SubResource("GDScript_xvcv1")
+
+[node name="new button" type="Button" parent="."]
+offset_left = 577.0
+offset_top = 399.0
+offset_right = 704.0
+offset_bottom = 438.0
+text = "New Level
+"
+script = SubResource("GDScript_xo4xu")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 544.0
+offset_top = 640.0
+offset_right = 730.0
+offset_bottom = 694.0
+text = "Quit"
+script = SubResource("GDScript_71jgw")
+
+[node name="game name" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "game version"
+script = SubResource("GDScript_dq4v8")
+
+[node name="harper" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(649, 163)
+texture = ExtResource("4")
+
+[connection signal="pressed" from="new button" to="new button" method="_on_pressed"]
